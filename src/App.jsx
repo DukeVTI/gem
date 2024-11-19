@@ -25,14 +25,6 @@ function App() {
                 
                 setUser(userData);
                 console.log('Telegram user:', userData);
-
-                // Set up main button
-                setMainButton({
-                    text: 'Continue',
-                    onClick: () => {
-                        console.log('Main button clicked');
-                    }
-                });
             } catch (err) {
                 setError(err.message);
                 console.error('Initialization error:', err);

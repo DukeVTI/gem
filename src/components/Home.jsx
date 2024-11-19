@@ -23,7 +23,9 @@ import {
   MessageCircle
 } from 'lucide-react';
 
-const HomeTab = () => {
+import App from '../App';
+
+const HomeTab = () => { 
   const [userData] = useState({
     profile: {
       name: "DukeVTI",

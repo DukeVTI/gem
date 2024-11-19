@@ -19,7 +19,7 @@ export const initTelegramWebApp = () => {
         // We'll check if features are supported before using them
         if (telegram.setHeaderColor && version > 6.0) {
             try {
-                telegram.setHeaderColor('#2481cc');
+                telegram.setHeaderColor('#');
             } catch (error) {
                 console.warn('Failed to set header color:', error);
             }
@@ -91,35 +91,7 @@ export const handleBackButton = (show = true) => {
     }
 };
 
-export const setMainButton = ({
-    text,
-    color = '#2481cc',
-    textColor = '#ffffff',
-    onClick,
-    isVisible = true,
-    isActive = true,
-}) => {
-    try {
-        if (!telegram?.MainButton) {
-            throw new Error('Main button not supported');
-        }
-        
-        const button = telegram.MainButton;
-        
-        // Check if properties exist before setting them
-        if ('text' in button) button.text = text;
-        if ('color' in button) button.color = color;
-        if ('textColor' in button) button.textColor = textColor;
-        if ('isVisible' in button) button.isVisible = isVisible;
-        if ('isActive' in button) button.isActive = isActive;
 
-        if (onClick && button.onClick) {
-            button.onClick(onClick);
-        }
-    } catch (error) {
-        console.error('Main button operation failed:', error.message);
-    }
-};
 
 export const hapticFeedback = {
     impact: {
