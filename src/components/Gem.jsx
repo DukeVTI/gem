@@ -81,7 +81,7 @@ const GemQuest = ({ user }) => {
             case 'community':
                 return <CommunityTab />;
             case 'profile':
-                return <ProfileTab user={user} />;
+                return <Home user={user} />;
             default:
                 return <HomeTab />;
         }

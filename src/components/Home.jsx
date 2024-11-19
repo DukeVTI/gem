@@ -25,7 +25,7 @@ import {
 
 import App from '../App';
 
-const HomeTab = () => { 
+const Home = () => { 
   const [userData] = useState({
     profile: {
       name: "DukeVTI",
@@ -342,4 +342,4 @@ const HomeTab = () => {
   );
 };
 
-export default HomeTab;
+export default Home;
