@@ -9,7 +9,8 @@ import {
 import ProfileTab from './Profile';
 import CommunityTab from './Community';
 import LeaderboardTab from './Leaderboard';
-import HomeTab from './Home';
+/* import HomeTab from './Home'; */
+import HomeTab from '../pages/Home';
 
 // Extracted Tab Button Component
 const TabButton = ({ item, isActive, onClick }) => (
