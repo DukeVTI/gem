@@ -93,7 +93,6 @@ const GemQuest = ({ user }) => {
                 {renderContent()}
             </div>
             
-            {/* Bottom Navigation */}
             <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
     );
