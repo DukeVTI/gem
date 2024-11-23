@@ -1,6 +1,6 @@
 // src/App.jsx
 import { useEffect, useState } from 'react';
-import { initTelegramWebApp, getTelegramUser, setMainButton } from './Telegram/telegram';
+import { initTelegramWebApp, getTelegramUser } from './Telegram/telegram';
 import GemQuest from './components/Gem';
 
 function App() {

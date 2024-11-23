@@ -13,7 +13,8 @@ import {
   ArrowUp,
   Sparkles,
   Flame,
-  Shield
+  Shield,
+  TrendingUp
 } from 'lucide-react';
 
 const LeaderboardTab = () => {
@@ -74,8 +75,7 @@ const LeaderboardTab = () => {
           badges: ["Quest Expert"],
           achievements: ["100 Quests Completed"],
           change: 2
-        },
-        // Add more quest-specific rankings
+        }
       ],
       community: [
         {
@@ -85,8 +85,7 @@ const LeaderboardTab = () => {
           badges: ["Top Contributor"],
           achievements: ["1000 Helpful Responses"],
           change: 0
-        },
-        // Add more community-specific rankings
+        }
       ],
       gemPoints: [
         {
@@ -96,8 +95,7 @@ const LeaderboardTab = () => {
           badges: ["GP Master"],
           achievements: ["First to 25k GP"],
           change: 1
-        },
-        // Add more GP-specific rankings
+        }
       ]
     },
     stats: {
@@ -111,17 +109,17 @@ const LeaderboardTab = () => {
 
   const getRankIcon = (rank) => {
     switch (rank) {
-      case 1: return <Crown className="w-6 h-6 text-yellow-500" />;
+      case 1: return <Crown className="w-6 h-6 text-yellow-400" />;
       case 2: return <Medal className="w-6 h-6 text-gray-400" />;
       case 3: return <Medal className="w-6 h-6 text-amber-600" />;
-      default: return <Shield className="w-6 h-6 text-blue-500" />;
+      default: return <Shield className="w-6 h-6 text-blue-400" />;
     }
   };
 
   const getChangeIndicator = (change) => {
-    if (change > 0) return <div className="flex items-center text-green-500 text-sm"><ArrowUp className="w-4 h-4" />+{change}</div>;
-    if (change < 0) return <div className="flex items-center text-red-500 text-sm"><ArrowUp className="w-4 h-4 rotate-180" />{change}</div>;
-    return <div className="text-gray-500 text-sm">-</div>;
+    if (change > 0) return <div className="flex items-center text-emerald-400 text-sm"><ArrowUp className="w-4 h-4" />+{change}</div>;
+    if (change < 0) return <div className="flex items-center text-red-400 text-sm"><ArrowUp className="w-4 h-4 rotate-180" />{change}</div>;
+    return <div className="text-purple-300 text-sm">-</div>;
   };
 
   const getScoreDisplay = (player, category) => {
@@ -135,27 +133,29 @@ const LeaderboardTab = () => {
   };
 
   return (
-    <div className="pb-20">
-      {/* Stats Header */}
-      <div className="p-4 bg-gradient-to-br from-blue-500 to-purple-600 text-white">
-        <div className="flex justify-between items-center mb-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 text-white pb-20">
+      {/* Hero Banner */}
+      <div className="p-6 bg-gradient-to-br from-purple-900 to-indigo-900 border-b-2 border-purple-500/30">
+        <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-2">
-            <Trophy className="w-6 h-6" />
-            <span className="text-lg font-bold">Achievement Board</span>
+            <Trophy className="w-8 h-8 text-yellow-400" />
+            <span className="text-2xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent">
+              Achievement Board
+            </span>
           </div>
-          <Clock className="w-5 h-5" />
+          <Clock className="w-6 h-6 text-purple-300" />
         </div>
         
         {/* Timeframe Selector */}
-        <div className="flex space-x-2 mb-4 overflow-x-auto">
+        <div className="flex space-x-2 mb-6 overflow-x-auto">
           {leaderboardData.timeframes.map(frame => (
             <button
               key={frame.id}
               onClick={() => setTimeframe(frame.id)}
-              className={`px-3 py-1 rounded-full text-sm whitespace-nowrap
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all
                 ${timeframe === frame.id 
-                  ? 'bg-white text-purple-600' 
-                  : 'bg-white/20'}`}
+                  ? 'bg-purple-500 text-white' 
+                  : 'bg-black/30 text-purple-200 border border-purple-500/30'}`}
             >
               {frame.label}
             </button>
@@ -163,57 +163,68 @@ const LeaderboardTab = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white/10 rounded-lg p-3">
+        <div className="grid grid-cols-3 gap-3">
+          <div className="bg-black/30 rounded-lg p-4 border border-purple-500/30">
             <div className="flex items-center space-x-2">
-              <Users className="w-4 h-4 opacity-80" />
-              <div className="text-sm opacity-80">Active Players</div>
+              <Users className="w-5 h-5 text-blue-400" />
+              <div>
+                <div className="text-xs text-purple-200">Active Players</div>
+                <div className="font-bold text-lg">{leaderboardData.stats.activeUsers}</div>
+              </div>
             </div>
-            <div className="text-xl font-bold">{leaderboardData.stats.activeUsers}</div>
           </div>
-          <div className="bg-white/10 rounded-lg p-3">
+          <div className="bg-black/30 rounded-lg p-4 border border-purple-500/30">
             <div className="flex items-center space-x-2">
-              <Coins className="w-4 h-4 opacity-80" />
-              <div className="text-sm opacity-80">Total Rewards</div>
+              <Target className="w-5 h-5 text-purple-400" />
+              <div>
+                <div className="text-xs text-purple-200">Quests Done</div>
+                <div className="font-bold text-lg">{leaderboardData.stats.questsCompleted}</div>
+              </div>
             </div>
-            <div className="text-xl font-bold">{leaderboardData.stats.totalRewardsGP.toLocaleString()} GP</div>
+          </div>
+          <div className="bg-black/30 rounded-lg p-4 border border-purple-500/30">
+            <div className="flex items-center space-x-2">
+              <Coins className="w-5 h-5 text-yellow-400" />
+              <div>
+                <div className="text-xs text-purple-200">Total Rewards</div>
+                <div className="font-bold text-lg">{leaderboardData.stats.totalRewardsGP.toLocaleString()}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Category Tabs */}
       <div className="p-4">
-        <div className="flex space-x-2 overflow-x-auto">
+        <div className="flex space-x-2 overflow-x-auto mb-4">
           {leaderboardData.categories.map(category => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg whitespace-nowrap
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all
                 ${activeCategory === category.id 
-                  ? 'bg-purple-100 text-purple-700' 
-                  : 'bg-white text-gray-600'}`}
+                  ? 'bg-purple-500/20 border-purple-500 text-purple-200' 
+                  : 'bg-black/30 border-purple-500/30 text-purple-300'} border`}
             >
-              <category.icon className={`w-4 h-4 ${activeCategory === category.id ? 'text-purple-500' : category.color}`} />
-              <span className="text-sm font-medium">{category.name}</span>
+              <category.icon className={`w-4 h-4 ${category.color}`} />
+              <span className="text-sm font-medium whitespace-nowrap">{category.name}</span>
             </button>
           ))}
         </div>
         
         {/* Category Description */}
-        <div className="mt-2 text-sm text-gray-600 px-2">
+        <div className="text-sm text-purple-300 px-2 mb-4">
           {leaderboardData.categories.find(c => c.id === activeCategory)?.description}
         </div>
       </div>
 
       {/* Rankings */}
       <div className="p-4">
-        <div className="bg-white rounded-xl shadow">
+        <div className="space-y-3">
           {leaderboardData.rankings[activeCategory]?.map((player, index) => (
             <div 
               key={index}
-              className={`p-4 ${
-                index !== leaderboardData.rankings[activeCategory].length - 1 ? 'border-b' : ''
-              }`}
+              className="bg-black/40 rounded-xl border border-purple-500/30 p-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-4">
@@ -222,10 +233,10 @@ const LeaderboardTab = () => {
                     {getChangeIndicator(player.change)}
                   </div>
                   <div>
-                    <p className="font-medium">{player.name}</p>
-                    <div className="flex flex-wrap gap-1 mt-1">
+                    <p className="font-bold text-purple-100">{player.name}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
                       {player.badges?.map((badge, i) => (
-                        <span key={i} className="inline-block px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded">
+                        <span key={i} className="px-2 py-1 text-xs bg-purple-500/20 text-purple-200 rounded-lg">
                           {badge}
                         </span>
                       ))}
@@ -233,19 +244,19 @@ const LeaderboardTab = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-bold text-purple-600">
+                  <div className="font-bold text-lg text-purple-200">
                     {getScoreDisplay(player, activeCategory)}
                   </div>
                   {activeCategory === 'all' && (
-                    <div className="text-xs text-gray-500 mt-1">
+                    <div className="text-xs text-purple-300 mt-1">
                       QT: {player.questTokens} | CC: {player.communityCredits}
                     </div>
                   )}
                 </div>
               </div>
               {player.achievements && (
-                <div className="mt-2 flex items-center space-x-2 text-xs text-gray-500">
-                  <Sparkles className="w-4 h-4 text-yellow-500" />
+                <div className="mt-3 flex items-center space-x-2 text-xs text-purple-300 bg-purple-500/10 p-2 rounded-lg">
+                  <Sparkles className="w-4 h-4 text-yellow-400" />
                   <div className="flex space-x-2">
                     {player.achievements.map((achievement, i) => (
                       <span key={i}>
@@ -263,24 +274,27 @@ const LeaderboardTab = () => {
 
       {/* Summary Stats */}
       <div className="p-4">
-        <div className="bg-white rounded-xl shadow p-4">
-          <h3 className="font-semibold text-lg flex items-center mb-4">
-            <Star className="w-5 h-5 text-yellow-500 mr-2" />
+        <div className="bg-black/40 rounded-xl border border-purple-500/30 p-4">
+          <h3 className="font-bold text-lg flex items-center mb-4 text-purple-100">
+            <Star className="w-5 h-5 text-yellow-400 mr-2" />
             Period Summary
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-500">Total Players</p>
+              <p className="text-sm text-purple-300">Total Players</p>
               <div className="flex items-center space-x-2">
-                <p className="text-xl font-bold text-purple-600">
+                <p className="text-xl font-bold text-purple-200">
                   {leaderboardData.stats.totalParticipants.toLocaleString()}
                 </p>
-                <span className="text-xs text-green-500">+{leaderboardData.stats.weeklyGrowth}%</span>
+                <span className="text-xs text-emerald-400 flex items-center">
+                  <TrendingUp className="w-4 h-4 mr-1" />
+                  {leaderboardData.stats.weeklyGrowth}%
+                </span>
               </div>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Quests Completed</p>
-              <p className="text-xl font-bold text-purple-600">
+              <p className="text-sm text-purple-300">Quests Completed</p>
+              <p className="text-xl font-bold text-purple-200">
                 {leaderboardData.stats.questsCompleted.toLocaleString()}
               </p>
             </div>

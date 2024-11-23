@@ -14,21 +14,22 @@ import {
   Medal,
   Sparkles,
   Target,
+  ChevronRight,
   Flame,
-  ChevronRight
+  MessageCircle,
+  Zap
 } from 'lucide-react';
 
 const CommunityTab = () => {
   const [communityData] = useState({
-    // Original community status data
     level: "Community Guide",
     communityCredits: 890,
     nextLevel: "Senior Guide",
     creditsToNextLevel: 110,
     badges: [
-      { name: "First Adventurer", icon: Clock, color: "text-purple-500" },
-      { name: "Community Helper", icon: Users, color: "text-blue-500" },
-      { name: "Quest Mentor", icon: Star, color: "text-yellow-500" }
+      { name: "First Adventurer", icon: Clock, color: "text-purple-400" },
+      { name: "Community Helper", icon: Users, color: "text-blue-400" },
+      { name: "Quest Mentor", icon: Star, color: "text-yellow-400" }
     ],
     ranks: [
       { name: "Community Member", required: 0, current: true },
@@ -36,7 +37,6 @@ const CommunityTab = () => {
       { name: "Senior Guide", required: 1000, current: false },
       { name: "Community Leader", required: 2500, current: false }
     ],
-    // Additional stats from second version
     activeUsers: 1234,
     onlineNow: 89,
     unreadMessages: 3,
@@ -49,203 +49,154 @@ const CommunityTab = () => {
     }
   });
 
-  const [selectedFeature, setSelectedFeature] = useState(null);
-
   const features = [
     {
       id: 'chat',
       icon: MessageSquare,
-      color: 'text-blue-500',
+      color: 'from-blue-500 to-blue-700',
       title: 'Community Chat',
       description: 'Connect with fellow questers',
       badge: communityData.unreadMessages > 0 ? `${communityData.unreadMessages} new` : null,
-      rightIcon: Trophy
     },
     {
       id: 'events',
       icon: Calendar,
-      color: 'text-green-500',
+      color: 'from-green-500 to-green-700',
       title: 'Community Events',
       description: 'Weekly challenges & meetups',
       badge: communityData.upcomingEvents > 0 ? `${communityData.upcomingEvents} upcoming` : null,
-      rightIcon: Sparkles
     },
     {
       id: 'quests',
       icon: Target,
-      color: 'text-purple-500',
-      title: 'Community Quests',
-      description: 'Group missions & rewards',
+      color: 'from-purple-500 to-purple-700',
+      title: 'Group Quests',
+      description: 'Team up for rewards',
       badge: `${communityData.weeklyQuests} active`,
-      rightIcon: Medal
-    },
-    {
-      id: 'rewards',
-      icon: Gift,
-      color: 'text-red-500',
-      title: 'Community Rewards',
-      description: 'Exclusive perks & items',
-      rightIcon: Star
-    },
-    {
-      id: 'groups',
-      icon: Building2,
-      color: 'text-gray-500',
-      title: 'Adventure Groups',
-      description: 'Coming soon',
-      disabled: true,
-      rightIcon: Lock
     }
   ];
 
   return (
-    <div className="pb-20">
-      {/* Stats Header */}
-      <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Users className="w-5 h-5" />
-            <span>{communityData.onlineNow} online</span>
-          </div>
-          <div className="text-sm">
-            Total Members: {communityData.activeUsers.toLocaleString()}
-          </div>
-        </div>
-      </div>
-
-      {/* Community Status */}
-      <div className="p-4">
-        <div className="bg-white rounded-xl shadow">
-          <div className="p-4 border-b flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Shield className="w-6 h-6 text-blue-500" />
-              <div>
-                <p className="font-medium">{communityData.level}</p>
-                <p className="text-sm text-gray-500">Community Rank</p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 text-white pb-20">
+      {/* Hero Banner */}
+      <div className="p-6 bg-gradient-to-br from-purple-900 to-indigo-900 border-b-2 border-purple-500/30">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-4">
+            <div className="p-3 bg-black/30 rounded-lg border border-purple-500/30">
+              <Shield className="w-6 h-6 text-purple-400" />
             </div>
-            <div className="text-right">
-              <p className="font-bold">{communityData.communityCredits}</p>
-              <p className="text-sm text-gray-500">Community Credits</p>
-            </div>
-          </div>
-          <div className="p-4 border-b">
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
-                className="bg-blue-500 h-2 rounded-full" 
-                style={{ width: `${(communityData.communityCredits / (communityData.communityCredits + communityData.creditsToNextLevel)) * 100}%` }}
-              />
-            </div>
-            <p className="text-sm text-gray-500 mt-2">
-              {communityData.creditsToNextLevel} credits until {communityData.nextLevel}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Spotlight Member */}
-      <div className="p-4">
-        <div className="bg-white rounded-xl shadow p-4 border-l-4 border-yellow-500">
-          <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-semibold text-lg flex items-center">
-                <Trophy className="w-5 h-5 text-yellow-500 mr-2" />
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-200 to-purple-500 bg-clip-text text-transparent">
+                {communityData.level}
+              </h1>
+              <p className="text-purple-200">{communityData.communityCredits} Community Credits</p>
+            </div>
+          </div>
+          <div className="bg-black/30 px-4 py-2 rounded-lg border border-purple-500/30">
+            <p className="text-sm text-purple-200">{communityData.onlineNow} Online Now</p>
+            <p className="text-xs text-purple-400">of {communityData.activeUsers.toLocaleString()} members</p>
+          </div>
+        </div>
+        
+        <div className="bg-black/30 rounded-xl border border-purple-500/30 p-4">
+          <div className="flex justify-between text-sm mb-2">
+            <span className="text-purple-200">Progress to {communityData.nextLevel}</span>
+            <span className="text-purple-300">{communityData.creditsToNextLevel} credits to go</span>
+          </div>
+          <div className="h-3 bg-purple-900/50 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500"
+              style={{ width: `${(communityData.communityCredits / (communityData.communityCredits + communityData.creditsToNextLevel)) * 100}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="p-4 grid grid-cols-3 gap-3">
+        {features.map((feature) => (
+          <button
+            key={feature.id}
+            className={`bg-gradient-to-br ${feature.color} p-4 rounded-xl flex flex-col items-center justify-center shadow-lg hover:brightness-110 transition-all`}
+          >
+            <feature.icon className="w-6 h-6 mb-1" />
+            <span className="text-sm font-bold">{feature.title}</span>
+            {feature.badge && (
+              <span className="mt-1 px-2 py-1 bg-black/20 rounded-full text-xs">
+                {feature.badge}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Member Spotlight */}
+      <div className="p-4">
+        <div className="bg-black/40 rounded-xl border border-purple-500/30 p-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="font-bold text-lg flex items-center mb-2">
+                <Trophy className="w-5 h-5 text-yellow-400 mr-2" />
                 Member Spotlight
-              </h3>
-              <p className="text-sm text-gray-600">{communityData.spotlightMember.name}</p>
-              <span className="inline-block px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded mt-1">
+              </h2>
+              <p className="text-xl font-bold text-purple-200">{communityData.spotlightMember.name}</p>
+              <span className="inline-block px-2 py-1 bg-purple-500/20 rounded text-sm text-purple-200 mt-1">
                 {communityData.spotlightMember.achievement}
               </span>
             </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-500">Quests Completed</p>
-              <p className="text-2xl font-bold text-yellow-600">{communityData.spotlightMember.questsCompleted}</p>
+            <div className="text-center bg-black/30 p-3 rounded-lg border border-purple-500/30">
+              <p className="text-3xl font-bold text-yellow-400">{communityData.spotlightMember.questsCompleted}</p>
+              <p className="text-sm text-purple-300">Quests</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Community Features */}
+      {/* Badges */}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-3">Community</h2>
-        <div className="bg-white rounded-xl shadow">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            const RightIcon = feature.rightIcon;
-            
-            return (
-              <button
-                key={feature.id}
-                className={`w-full p-4 flex items-center justify-between 
-                  ${index !== features.length - 1 ? 'border-b' : ''}
-                  ${feature.disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}
-                  ${selectedFeature === feature.id ? 'bg-gray-50' : ''}`}
-                onClick={() => !feature.disabled && setSelectedFeature(feature.id)}
-                disabled={feature.disabled}
-              >
-                <div className="flex items-center space-x-3">
-                  <Icon className={`w-6 h-6 ${feature.color}`} />
-                  <div className="text-left">
-                    <span className="font-medium">{feature.title}</span>
-                    <p className="text-sm text-gray-500">{feature.description}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2">
-                  {feature.badge && (
-                    <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
-                      {feature.badge}
-                    </span>
-                  )}
-                  <RightIcon className="w-5 h-5 text-gray-400" />
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Badges Section */}
-      <div className="p-4">
-        <h2 className="text-lg font-bold mb-3">Badges</h2>
-        <div className="bg-white rounded-xl shadow">
+        <h2 className="text-lg font-bold mb-3 flex items-center">
+          <Medal className="w-5 h-5 text-yellow-400 mr-2" />
+          Your Badges
+        </h2>
+        <div className="grid grid-cols-3 gap-3">
           {communityData.badges.map((badge, index) => (
-            <div 
-              key={index}
-              className={`p-4 flex items-center justify-between ${
-                index !== communityData.badges.length - 1 ? 'border-b' : ''
-              }`}
-            >
-              <div className="flex items-center space-x-3">
+            <div key={index} className="bg-black/40 rounded-xl border border-purple-500/30 p-4 text-center">
+              <div className={`w-12 h-12 mx-auto bg-black/30 rounded-xl flex items-center justify-center mb-2 border border-purple-500/30`}>
                 <badge.icon className={`w-6 h-6 ${badge.color}`} />
-                <span className="font-medium">{badge.name}</span>
               </div>
-              <Crown className="w-5 h-5 text-yellow-500" />
+              <p className="font-medium text-sm text-purple-200">{badge.name}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Rank Progress */}
+      {/* Rank Journey */}
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-3">Ranks</h2>
-        <div className="bg-white rounded-xl shadow">
-          {communityData.ranks.map((rank, index) => (
-            <div 
-              key={index}
-              className={`p-4 flex items-center justify-between ${
-                index !== communityData.ranks.length - 1 ? 'border-b' : ''
-              }`}
-            >
-              <div className="flex items-center space-x-3">
-                <Shield className={`w-6 h-6 ${rank.current ? 'text-blue-500' : 'text-gray-400'}`} />
-                <div>
-                  <p className="font-medium">{rank.name}</p>
-                  <p className="text-sm text-gray-500">{rank.required} credits required</p>
+        <h2 className="text-lg font-bold mb-3 flex items-center">
+          <Crown className="w-5 h-5 text-yellow-400 mr-2" />
+          Rank Journey
+        </h2>
+        <div className="bg-black/40 rounded-xl border border-purple-500/30 p-4">
+          <div className="space-y-6">
+            {communityData.ranks.map((rank, index) => (
+              <div key={index} className="flex items-center">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center border ${
+                  rank.current 
+                    ? 'bg-purple-500/20 border-purple-500 text-purple-400' 
+                    : 'bg-black/30 border-purple-500/30 text-purple-600'
+                }`}>
+                  <Shield className="w-5 h-5" />
                 </div>
+                <div className="ml-4 flex-1">
+                  <p className={`font-bold ${rank.current ? 'text-purple-200' : 'text-purple-400'}`}>
+                    {rank.name}
+                  </p>
+                  <p className="text-sm text-purple-400">{rank.required} credits</p>
+                </div>
+                {rank.current && <Crown className="w-5 h-5 text-yellow-400" />}
               </div>
-              {rank.current && <Trophy className="w-5 h-5 text-yellow-500" />}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

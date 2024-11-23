@@ -19,6 +19,7 @@ import {
   TrendingUp,
   Gamepad,
   BookOpen,
+  StoreIcon,
   MessageCircle
 } from 'lucide-react';
 
@@ -201,8 +202,8 @@ const HomeTab = () => {
           <span className="text-sm font-bold">Battle</span>
         </button>
         <button className="bg-gradient-to-br from-blue-500 to-blue-700 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all">
-          <MessageCircle className="w-6 h-6 mb-1" />
-          <span className="text-sm font-bold">Guild</span>
+          <StoreIcon className="w-6 h-6 mb-1" />
+          <span className="text-sm font-bold">Store</span>
         </button>
         <button className="bg-gradient-to-br from-green-500 to-green-700 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg hover:from-green-600 hover:to-green-800 transition-all">
           <BookOpen className="w-6 h-6 mb-1" />
