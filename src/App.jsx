@@ -1,7 +1,9 @@
 // src/App.jsx
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { initTelegramWebApp, getTelegramUser } from './Telegram/telegram';
 import GemQuest from './components/Gem';
+import StorePage from './components/Store';
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -60,11 +62,19 @@ function App() {
         );
     }
 
-    return (
+    /* return (
         <div>
             <GemQuest user={user} />
         </div>
-    );
+    ); */
+    return (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<GemQuest user={user} />} />
+            <Route path="/store" element={<StorePage />} />
+          </Routes>
+        </BrowserRouter>
+      );
 }
 
 export default App;

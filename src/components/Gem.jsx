@@ -63,6 +63,7 @@ const BottomNav = ({ activeTab, setActiveTab }) => {
     { id: 'profile', icon: User, label: 'Hero' }
   ];
 
+
   return (
     <div className="fixed bottom-0 left-0 right-0 pb-safe">
       {/* Navigation Background */}

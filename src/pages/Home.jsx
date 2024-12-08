@@ -22,8 +22,10 @@ import {
   StoreIcon,
   MessageCircle
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeTab = () => {
+  const navigate = useNavigate();
   const [userData] = useState({
     profile: {
       name: "DukeVTI",
@@ -112,7 +114,9 @@ const HomeTab = () => {
       }
     ]
   });
-
+  const handleStoreClick = ()=>{
+    navigate('/store')
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 text-white pb-20">
       {/* Hero Banner */}
@@ -201,7 +205,9 @@ const HomeTab = () => {
           <Gamepad className="w-6 h-6 mb-1" />
           <span className="text-sm font-bold">Battle</span>
         </button>
-        <button className="bg-gradient-to-br from-blue-500 to-blue-700 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all">
+        <button 
+        onClick={handleStoreClick}
+        className="bg-gradient-to-br from-blue-500 to-blue-700 p-4 rounded-xl flex flex-col items-center justify-center shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all" >
           <StoreIcon className="w-6 h-6 mb-1" />
           <span className="text-sm font-bold">Store</span>
         </button>
